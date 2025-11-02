@@ -39,6 +39,13 @@ function io.close(handle) end
 function io.flush() end
 
 ---Get or set the current input file
+---@return ccTweaked.fs.Handle handle The current input file handle
+---@throws If the provided path cannot be opened for reading
+------
+---[Official Documentation](https://tweaked.cc/module/io.html#v:input)
+function io.input() end
+
+---Get or set the current input file
 ---@param file? ccTweaked.fs.Handle|ccTweaked.fs.path The new input file, either as a file path or a handle
 ---@return ccTweaked.fs.Handle handle The current input file handle
 ---@throws If the provided path cannot be opened for reading
@@ -76,6 +83,13 @@ function io.lines(path, readMode) end
 ------
 ---[Official Documentation](https://tweaked.cc/module/io.html#v:open)
 function io.open(path, mode) end
+
+---Get or set the current output file
+---@return ccTweaked.fs.Handle handle The current output file handle
+---@throws If the provided path cannot be opened for writing
+---------
+---[Official Documentation](https://tweaked.cc/module/io.html#v:output)
+function io.output() end
 
 ---Get or set the current output file
 ---@param file? ccTweaked.fs.Handle|ccTweaked.fs.path The new output file, either as a file path or a handle

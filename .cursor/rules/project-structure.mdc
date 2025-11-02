@@ -1,0 +1,67 @@
+---
+globs: **
+alwaysApply: false
+---
+# Project Structure definition
+
+This rule defines the project structure for how the lua-ls-cc-tweaked project should be built out when functionality is requested to be added to it.
+
+The top level directory structure at the moment is
+
+- **Root Level Files**
+
+  - Configuration files:
+    - `config.json` - Lua Language Server configuration file that defines workspace settings, global diagnostics, and trigger words/phrases for detecting CC:Tweaked projects
+    - This file configures Lua runtime version (5.3), registers all CC:Tweaked global APIs as diagnostics globals, and defines workspace detection patterns
+  - Documentation:
+    - `README.md` - Main project documentation explaining setup, installation, and usage instructions for the Lua Language Server library
+
+- **library**
+
+  - This is the core directory containing all Lua Language Server type definitions and API stubs for ComputerCraft: Tweaked.
+  - Files in this directory provide autocomplete, type checking, and documentation for CC:Tweaked APIs.
+  - **Direct API files** - Core CC:Tweaked API definitions matching official API names:
+    - Each file corresponds to a CC:Tweaked API module (e.g., `io.lua`, `turtle.lua`, `redstone.lua`)
+    - These files define the functions, constants, and types exposed by each API
+    - Files use Lua Language Server annotations (like `@type`, `@param`, `@return`) for type information
+    - Examples: `colors.lua`, `commands.lua`, `disk.lua`, `fs.lua`, `gps.lua`, `help.lua`, `http.lua`, `io.lua`, `keys.lua`, `multishell.lua`, `os.lua`, `paintutils.lua`, `parallel.lua`, `peripheral.lua`, `pocket.lua`, `rednet.lua`, `redstone.lua`, `settings.lua`, `shell.lua`, `term.lua`, `textutils.lua`, `turtle.lua`, `vector.lua`, `window.lua`
+  - **library/cc/** - CC-specific utility libraries (not standard CC:Tweaked APIs):
+    - Contains additional helper modules and utilities that extend or complement CC:Tweaked functionality
+    - **library/cc/audio/** - Audio-related utilities:
+      - `dfpwm.lua` - DFPMW audio format handling
+    - **library/cc/image/** - Image processing utilities:
+      - `nft.lua` - NFT image format handling
+    - Other utilities: `completion.lua`, `expect.lua`, `pretty.lua`, `strings.lua`
+  - **library/types/** - Type definition system for complex objects and structures:
+    - Contains type definitions that complement the API files, providing detailed type information for return values, parameters, and internal structures
+    - **Direct type files** - Type definitions for API-related structures:
+      - Files define types for enums, constants, and data structures used by APIs
+      - Examples: `colors.lua` (color constants/types), `events.lua` (event type definitions), `fs.lua` (filesystem types), `general.lua` (general types), `http.lua` (HTTP-related types), `io.lua` (I/O types), `multishell.lua` (multishell types), `os.lua` (OS types), `peripheral.lua` (peripheral types), `redstone.lua` (redstone types), `settings.lua` (settings types), `shell.lua` (shell types), `textutils.lua` (textutils types), `turtle.lua` (turtle types)
+    - **library/types/objects/** - Object type definitions organized by category:
+      - Contains detailed type definitions for complex objects returned by CC:Tweaked APIs
+      - These provide autocomplete and type checking for object properties and methods
+      - **library/types/objects/file/** - File handle object types:
+        - `Handle.lua` - Base file handle interface
+        - `ReadHandle.lua` - Read-only file handle type
+        - `WriteHandle.lua` - Write-only file handle type
+        - `BinaryReadHandle.lua` - Binary read handle type
+        - `BinaryWriteHandle.lua` - Binary write handle type
+      - **library/types/objects/http/** - HTTP-related object types:
+        - `Response.lua` - HTTP response object type
+        - `BinaryResponse.lua` - Binary HTTP response type
+        - `Websocket.lua` - WebSocket connection type
+      - **library/types/objects/peripheral/** - Peripheral object types:
+        - Types for various peripheral interfaces returned by `peripheral.wrap()` and similar functions
+        - Examples: `Command.lua`, `Computer.lua`, `Drive.lua`, `EnergyStorage.lua`, `FluidStorage.lua`, `Inventory.lua`, `Modem.lua`, `Monitor.lua`, `Printer.lua`, `Speaker.lua`, `WiredModem.lua`
+      - **Other object types**: `Redirect.lua`, `Vector.lua`, `Window.lua`
+- **scripts**
+  - `extract_peripheral_methods.py` - Extracts method definitions and documentation from CC:Tweaked peripheral Java source files and generates Lua type stubs for the Lua Language Server. This script parses Java classes for `@LuaFunction`-annotated methods, collects signatures, parameter types, return information, exceptions, and documentation, and outputs `.lua` files in `library/types/objects/peripheral/` to provide accurate type definitions and autocompletion for peripheral objects.
+
+## File Organization Principles
+
+- **API files** (directly in `library/`) should mirror the exact CC:Tweaked API structure and naming
+- **Type files** in `library/types/` should provide complementary type information for objects and complex types used by APIs
+- **CC utilities** in `library/cc/` are extensions/helpers not part of the core CC:Tweaked API
+- All files should use proper Lua Language Server annotations (`@type`, `@param`, `@return`, `@class`, etc.) for maximum IDE support
+- Type definitions should be comprehensive to provide accurate autocomplete and error checking
+- Documentation comments should reference official CC:Tweaked documentation when available (using links like `https://tweaked.cc/module/io.html`)

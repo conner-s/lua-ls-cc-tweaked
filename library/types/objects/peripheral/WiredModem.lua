@@ -1,71 +1,86 @@
 ---@meta
 
----Modems allow you to send messages between computers over large distances
----
----🗒️The `rednet` API builds on top of modems and is more user-friendly
----
----Modems operate on channels. Any modem can send a message on a channel, but
----only those that have opened the channel are able to receive messages.
----
----Channels are an integer between 0 and 65535 (inclusive). While these channels
----have no initial significance, certain APIs or programs can make use of
----specififc channels. For example, the `gps` module sends all of its messages on
----`gps.CHANNEL_GPS` (default is 65534), while `rednet` uses the channel equal to
----the computer's ID
----
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html)
----@class ccTweaked.peripheral.WiredModem: ccTweaked.peripheral.Modem
-WiredModem = {}
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html)
+---@class ccTweaked.peripheral.Wiredmodem
+Wiredmodem = {}
 
----List all peripherals on the wired network
----
----If this computer is attached to the network, it **will not** be included in this list
----@return string[] peripherals Remote peripheral names on the network
-------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:getNamesRemote)
-function WiredModem.getNamesRemote() end
+---* Returns the network name of the current computer, if the modem is on. This * may be used by other computers on the network to wrap this computer as a * peripheral. *  * > [!NOTE] * > This function only appears on wired modems. Check {
 
----Get if a peripheral is available on this wired network
----@param name string The peripheral's name
----@return boolean isPresent If a peripheral with the given name is present
+---@return any The current computer's name.
+---@since 1.80pr1.7
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:isPresentRemote)
-function WiredModem.isPresentRemote(name) end
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html#v:attach)
+function Wiredmodem.attach() end
 
----Get the type of a peripheral on this wired network
----@param name string The peripheral's name
----@return ccTweaked.peripheral.peripheralType|nil type The peripheral's type or `nil` if it is not present
-------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:getTypeRemote)
-function WiredModem.getTypeRemote(name) end
+---* Get the type of a peripheral is available on this wired network. *  * > [!NOTE] * > This function only appears on wired modems. Check {
 
----Check that a peripheral is of a given type
----@param name string The peripheral's name
----@param type ccTweaked.peripheral.peripheralType The type to check
----@return boolean|nil isType If a peripheral has a given type or `nil` if it is not present
+---@param arguments any... The arguments
+---@return any The peripheral's name.
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:hasTypeRemote)
-function WiredModem.hasTypeRemote(name, type) end
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html#v:callRemote)
+function Wiredmodem.callRemote(arguments) end
 
----Get the names of the methods for a peripheral with the provided name
----@param name string The peripheral's name
----@return string[]|nil methods An array of method names or `nil` if it is not present
-------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:getMethodsRemote)
-function WiredModem.getMethodsRemote(name) end
+---* Close an open channel, meaning it will no longer receive messages. * *
 
----Call a method on a peripheral on this wired network
----@param name string The name of the peripheral to invoke the method on
----@param method string The name of the method to call
----@param ... any Args to pass to the method
----@return any ... The return values of the method
+---@param channel number The channel to close.
+---@throws LuaException If the channel is out of range.
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:callRemote)
-function WiredModem.callRemote(name, method, ...) end
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html#v:close)
+function Wiredmodem.close(channel) end
 
----Get the network name of the current computer, if the modem is on
----@return string|nil name The current computer's name on the wired network on `nil` if the modem is off
+---* Close all open channels.
+
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:getNameLocal)
-function WiredModem.getNameLocal() end
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html#v:closeAll)
+function Wiredmodem.closeAll() end
+
+---* List all remote peripherals on the wired network. *  * If this computer is attached to the network, it _will not_ be included in * this list. *  * > [!NOTE] * > This function only appears on wired modems. Check {
+
+---@return any Remote peripheral names on the network.
+------
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html#v:getNamesRemote)
+function Wiredmodem.getNamesRemote() end
+
+---* Check if a channel is open. * *
+
+---@param channel number The channel to check.
+---@return any Whether the channel is open.
+---@throws LuaException If the channel is out of range.
+------
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html#v:isOpen)
+function Wiredmodem.isOpen(channel) end
+
+---* Determine if a peripheral is available on this wired network. *  * > [!NOTE] * > This function only appears on wired modems. Check {
+
+---@param name string The peripheral's name.
+---@return boolean boolean If a peripheral is present with the given name.
+------
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html#v:isPresentRemote)
+function Wiredmodem.isPresentRemote(name) end
+
+---* Determine if this is a wired or wireless modem. *  * Some methods (namely those dealing with wired networks and remote peripherals) are only available on wired * modems. * *
+
+---@return any {
+------
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html#v:isWireless)
+function Wiredmodem.isWireless() end
+
+---* Open a channel on a modem. A channel must be open in order to receive messages. Modems can have up to 128 * channels open at one time. * *
+
+---@param channel number The channel to open. This must be a number between 0 and 65535.
+---@throws LuaException If the channel is out of range.
+---@throws LuaException If there are too many open channels.
+------
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html#v:open)
+function Wiredmodem.open(channel) end
+
+---* Sends a modem message on a certain channel. Modems listening on the channel will queue a {
+
+---@param channel number The channel to send messages on.
+---@param replyChannel number The channel that responses to this message should be sent on. This can be the same as
+---@param payload any The object to send. This can be any primitive type (boolean, number, string) as well as
+---@throws LuaException If the channel is out of range.
+------
+---[Official Documentation](https://tweaked.cc/peripheral/wiredmodem.html#v:transmit)
+function Wiredmodem.transmit(channel, replyChannel, payload) end

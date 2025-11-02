@@ -1,47 +1,47 @@
 ---@meta
 
----A computer or turtle wrapped as a peripheral
----
----A computer will have the type `computer` while a turtle will have the type
----`turtle`
----
+---* A computer or turtle wrapped as a peripheral. *  * This allows for basic interaction with adjacent computers. Computers wrapped as peripherals will have the type * {@code computer} while turtles will be {@code turtle}. * * @cc.module computer
+
 ------
 ---[Official Documentation](https://tweaked.cc/peripheral/computer.html)
 ---@class ccTweaked.peripheral.Computer
 Computer = {}
 
----Turn the computer on
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/computer.html#v:turnOn)
-function Computer.turnOn() end
+---* Get the other computer's ID. * *
 
----Shutdown the computer
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/computer.html#v:shutdown)
-function Computer.shutdown() end
-
----Reboot or turn on the computer
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/computer.html#v:reboot)
-function Computer.reboot() end
-
----Get the ID of the computer
----@return integer ID The ID of the computer
+---@return any The computer's ID.
 ------
 ---[Official Documentation](https://tweaked.cc/peripheral/computer.html#v:getID)
 function Computer.getID() end
 
----Get whether the computer is on or not
----@return boolean isOn If the computer is on
+---* Get the other computer's label. * *
+
+---@return any The computer's label.
+------
+---[Official Documentation](https://tweaked.cc/peripheral/computer.html#v:getLabel)
+function Computer.getLabel() end
+
+---* Determine if the other computer is on. * *
+
+---@return any If the computer is on.
 ------
 ---[Official Documentation](https://tweaked.cc/peripheral/computer.html#v:isOn)
 function Computer.isOn() end
 
----Get the label of the computer
----@return string|nil label The computer's label or `nil` if it does not have one
+---* Reboot or turn on the other computer.
+
 ------
----[Official Documentation](https://tweaked.cc/peripheral/computer.html#v:getLabel)
-function Computer.getLabel() end
+---[Official Documentation](https://tweaked.cc/peripheral/computer.html#v:reboot)
+function Computer.reboot() end
+
+---* Shutdown the other computer.
+
+------
+---[Official Documentation](https://tweaked.cc/peripheral/computer.html#v:shutdown)
+function Computer.shutdown() end
+
+---* Turn the other computer on.
+
+------
+---[Official Documentation](https://tweaked.cc/peripheral/computer.html#v:turnOn)
+function Computer.turnOn() end

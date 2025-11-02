@@ -1,9 +1,9 @@
 ---@meta
 
 ------
----[Official Documentation](https://tweaked.cc/peripheral/speaker.html)
----@class ccTweaked.peripheral.Speaker
-Speaker = {}
+---[Official Documentation](https://tweaked.cc/peripheral/upgradespeaker.html)
+---@class ccTweaked.peripheral.Upgradespeaker
+Upgradespeaker = {}
 
 ---* Attempt to stream some audio data to the speaker. *  * This accepts a list of audio samples as amplitudes between -128 and 127. These are stored in an internal buffer * and played back at 48kHz. If this buffer is full, this function will return {
 
@@ -13,8 +13,8 @@ Speaker = {}
 ---@throws LuaException If the audio data is malformed.
 ---@since 1.100
 ------
----[Official Documentation](https://tweaked.cc/peripheral/speaker.html#v:playAudio)
-function Speaker.playAudio(audio, volume) end
+---[Official Documentation](https://tweaked.cc/peripheral/upgradespeaker.html#v:playAudio)
+function Upgradespeaker.playAudio(audio, volume) end
 
 ---* Plays a note block note through the speaker. *  * This takes the name of a note to play, as well as optionally the volume * and pitch to play the note at. *  * The pitch argument uses semitones as the unit. This directly maps to the * number of clicks on a note block. For reference, 0, 12, and 24 map to F#, * and 6 and 18 map to C. *  * A maximum of 8 notes can be played in a single tick. If this limit is hit, this function will return * {
 
@@ -24,8 +24,8 @@ function Speaker.playAudio(audio, volume) end
 ---@return any Whether the note could be played as the limit was reached.
 ---@throws LuaException If the instrument doesn't exist.
 ------
----[Official Documentation](https://tweaked.cc/peripheral/speaker.html#v:playNote)
-function Speaker.playNote(instrumentA, volumeA, pitchA) end
+---[Official Documentation](https://tweaked.cc/peripheral/upgradespeaker.html#v:playNote)
+function Upgradespeaker.playNote(instrumentA, volumeA, pitchA) end
 
 ---* Plays a Minecraft sound through the speaker. *  * This takes the [name of a Minecraft sound](https://minecraft.wiki/w/Sounds.json), such as * {
 
@@ -35,12 +35,12 @@ function Speaker.playNote(instrumentA, volumeA, pitchA) end
 ---@return any Whether the sound could be played.
 ---@throws LuaException If the sound name was invalid.
 ------
----[Official Documentation](https://tweaked.cc/peripheral/speaker.html#v:playSound)
-function Speaker.playSound(name, volumeA, pitchA) end
+---[Official Documentation](https://tweaked.cc/peripheral/upgradespeaker.html#v:playSound)
+function Upgradespeaker.playSound(name, volumeA, pitchA) end
 
 ---* Stop all audio being played by this speaker. *  * This clears any audio that {
 
 ---@since 1.100
 ------
----[Official Documentation](https://tweaked.cc/peripheral/speaker.html#v:stop)
-function Speaker.stop() end
+---[Official Documentation](https://tweaked.cc/peripheral/upgradespeaker.html#v:stop)
+function Upgradespeaker.stop() end

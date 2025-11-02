@@ -1,116 +1,77 @@
 ---@meta
 
----Disk drives are a peripheral which allow you to read and write to floppy
----disks and other "mountable media" (such as computers or turtles). They also
----allow you to play records.
----
----When a disk drive attaches some mount (such as a floppy disk or computer), it
----attaches a folder called disk, disk2, etc... to the root directory of the
----computer. This folder can be used to interact with the files on that disk.
----
----When a disk is inserted, a `disk` event is fired, with the side peripheral is
----on. Likewise, when the disk is detached, a `disk_eject` event is fired.
----
+---* Disk drives are a peripheral which allow you to read and write to floppy disks and other "mountable media" (such as * computers or turtles). They also allow you to {@link #playAudio play records}. *  * When a disk drive attaches some mount (such as a floppy disk or computer), it attaches a folder called {@code disk}, * {@code disk2}, etc... to the root directory of the computer. This folder can be used to interact with the files on * that disk. *  * When a disk is inserted, a {@code disk} event is fired, with the side peripheral is on. Likewise, when the disk is * detached, a {@code disk_eject} event is fired. *  * ## Recipe *  *  *  * * @cc.module drive
+
 ------
 ---[Official Documentation](https://tweaked.cc/peripheral/drive.html)
 ---@class ccTweaked.peripheral.Drive
 Drive = {}
 
----Checks that an item is in the drive
----@return boolean present If an item is in the drive
----Supports: 💾💿🖥️
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:isDiskPresent)
-function Drive.isDiskPresent() end
+---* Returns the ID of the disk inserted in the drive. * *
 
----Get the label of the inserted item. If the inserted item is a computer,
----this returns the label of the computer as read by `os.getComputerLabel()`
----@return string|nil label The label of the inserted item or `nil` if no disk is inserted or the item doesn't have a label
----Supports: 💾💿🖥️
----
+---@return any The ID of the disk in the drive, or {
+---@since 1.4
 ------
----[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:getDiskLabel)
-function Drive.getDiskLabel() end
+---[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:attach)
+function Drive.attach() end
 
----Set the label of an inserted item.
----@param label? string The new value for the label
----Supports: 💾💿🖥️
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:setDiskLabel)
-function Drive.setDiskLabel(label) end
+---* Ejects any disk that may be in the drive.
 
----Check if an item is present and provides a mount. For records, returns false
----@return boolean hasMount
----
----Supports: 💾💿🖥️
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:hasData)
-function Drive.hasData() end
-
----Gets the path on this computer where the contents of the inserted item can be
----found
----@return ccTweaked.fs.path|nil path The path to the mount location or `nil` if the drive is empty or the inserted item cannot be mounted
----Supports: 💾💿🖥️
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:getMountPath)
-function Drive.getMountPath() end
-
----Checks that the inserted item is a music disk
----@return boolean hasAudio If an item is present and is a record
----Supports: 💾💿🖥️
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:hasAudio)
-function Drive.hasAudio() end
-
----Get the title of the music track from the record in the drive. This usually
----results in the same as `getLabel()` for records.
----@return string|false|nil title The track title, false if the inserted item is not a record, nil if there is no item in the drive
----Supports: 💾💿🖥️
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:getAudioTitle)
-function Drive.getAudioTitle() end
-
----Plays the record in the drive
----
----Make sure to check that there is an item in the drive and that it is a record with `hasData()`
----
----Stops any already playing records. The record will stop playing when it
----reaches the end of its runtime, is removed from the drive, or when stopped
----manually by `stopAudio()`
----
----Supports: 💿
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:playAudio)
-function Drive.playAudio() end
-
----Stops the currently playing record that was started with `disk.playAudio()`
----
----Supports: 💿
----
-------
----[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:stopAudio)
-function Drive.stopAudio() end
-
----Ejects any item that is in the drive, dropping it into the world
----
----Supports: 💾💿🖥️
----
 ------
 ---[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:ejectDisk)
 function Drive.ejectDisk() end
 
----Get the unique identifier of the disk in the drive. Only floppy disks have an
----ID
----@return number|nil ID The ID of the floppy disk or nil if the drive is empty or does not contain a floppy disk
----Supports: 💾
----
+---* Returns the title of the inserted audio disk. * *
+
+---@return any The title of the audio, or {
 ------
----[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:getDiskID)
-function Drive.getDiskID() end
+---[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:getAudioTitle)
+function Drive.getAudioTitle() end
+
+---* Returns the mount path for the inserted disk. * *
+
+---@return any The mount path for the disk, or {
+------
+---[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:getMountPath)
+function Drive.getMountPath() end
+
+---* Returns whether a disk with audio is inserted. * *
+
+---@return any Whether a disk with audio is inserted.
+------
+---[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:hasAudio)
+function Drive.hasAudio() end
+
+---* Returns whether a disk with data is inserted. * *
+
+---@return any Whether a disk with data is inserted.
+------
+---[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:hasData)
+function Drive.hasData() end
+
+---* Returns whether a disk is currently inserted in the drive. * *
+
+---@return any Whether a disk is currently inserted in the drive.
+------
+---[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:isDiskPresent)
+function Drive.isDiskPresent() end
+
+---* Plays the audio in the inserted disk, if available.
+
+------
+---[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:playAudio)
+function Drive.playAudio() end
+
+---* Returns the label of the disk in the drive if available. * *
+
+---@param label? any The label
+---@return any The label of the disk, or {
+------
+---[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:setDiskLabel)
+function Drive.setDiskLabel(label) end
+
+---* Stops any audio that may be playing. * *
+
+------
+---[Official Documentation](https://tweaked.cc/peripheral/drive.html#v:stopAudio)
+function Drive.stopAudio() end

@@ -1,23 +1,23 @@
 ---@meta
 
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html)
----@class ccTweaked.peripheral.Modem
-Modem = {}
+---[Official Documentation](https://tweaked.cc/peripheral/wirelessmodem.html)
+---@class ccTweaked.peripheral.Wirelessmodem
+Wirelessmodem = {}
 
 ---* Close an open channel, meaning it will no longer receive messages. * *
 
 ---@param channel number The channel to close.
 ---@throws LuaException If the channel is out of range.
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:close)
-function Modem.close(channel) end
+---[Official Documentation](https://tweaked.cc/peripheral/wirelessmodem.html#v:close)
+function Wirelessmodem.close(channel) end
 
 ---* Close all open channels.
 
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:closeAll)
-function Modem.closeAll() end
+---[Official Documentation](https://tweaked.cc/peripheral/wirelessmodem.html#v:closeAll)
+function Wirelessmodem.closeAll() end
 
 ---* Check if a channel is open. * *
 
@@ -25,15 +25,15 @@ function Modem.closeAll() end
 ---@return any Whether the channel is open.
 ---@throws LuaException If the channel is out of range.
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:isOpen)
-function Modem.isOpen(channel) end
+---[Official Documentation](https://tweaked.cc/peripheral/wirelessmodem.html#v:isOpen)
+function Wirelessmodem.isOpen(channel) end
 
 ---* Determine if this is a wired or wireless modem. *  * Some methods (namely those dealing with wired networks and remote peripherals) are only available on wired * modems. * *
 
 ---@return any {
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:isWireless)
-function Modem.isWireless() end
+---[Official Documentation](https://tweaked.cc/peripheral/wirelessmodem.html#v:isWireless)
+function Wirelessmodem.isWireless() end
 
 ---* Open a channel on a modem. A channel must be open in order to receive messages. Modems can have up to 128 * channels open at one time. * *
 
@@ -41,8 +41,8 @@ function Modem.isWireless() end
 ---@throws LuaException If the channel is out of range.
 ---@throws LuaException If there are too many open channels.
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:open)
-function Modem.open(channel) end
+---[Official Documentation](https://tweaked.cc/peripheral/wirelessmodem.html#v:open)
+function Wirelessmodem.open(channel) end
 
 ---* Sends a modem message on a certain channel. Modems listening on the channel will queue a {
 
@@ -51,5 +51,5 @@ function Modem.open(channel) end
 ---@param payload any The object to send. This can be any primitive type (boolean, number, string) as well as
 ---@throws LuaException If the channel is out of range.
 ------
----[Official Documentation](https://tweaked.cc/peripheral/modem.html#v:transmit)
-function Modem.transmit(channel, replyChannel, payload) end
+---[Official Documentation](https://tweaked.cc/peripheral/wirelessmodem.html#v:transmit)
+function Wirelessmodem.transmit(channel, replyChannel, payload) end

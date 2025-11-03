@@ -3,6 +3,36 @@ This is a [Lua Language Server](https://github.com/sumneko/lua-language-server) 
 
 Before the fork, this was intended to be used in [Visual Studio Code](https://code.visualstudio.com/) with [Sumneko's Lua extension](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) (`sumneko.lua`). This fork concentrates on making completions for ComputerCraft a first-class citizen in editors such as Neovim, Vim, and Emacs.
 
+## CC-Tweaked Source Reference
+
+This repository includes the CC-Tweaked source code as a Git submodule (located at `external/cc-tweaked`). The CC-Tweaked source is used as a **reference** to generate and maintain accurate LSP type definitions, especially for peripheral APIs.
+
+### Why Include the Source?
+
+CC-Tweaked peripherals are implemented in Java and expose Lua functions via the `@LuaFunction` annotation. The peripheral method extraction script (`scripts/extract_peripheral_methods.py`) analyzes the Java source code to:
+
+- **Extract method signatures** from `@LuaFunction`-annotated methods
+- **Parse Javadoc documentation** for parameters, return values, and error conditions
+- **Generate Lua type definition files** automatically for the Lua Language Server
+
+This ensures that type definitions stay in sync with the actual CC-Tweaked implementation, particularly when new peripheral methods are added or existing ones are updated.
+
+### Working with the Submodule
+
+To initialize the submodule after cloning this repository:
+
+```bash
+git submodule update --init --recursive
+```
+
+To update the submodule to the latest CC-Tweaked version:
+
+```bash
+git submodule update --remote external/cc-tweaked
+```
+
+For more information about generating type definitions from the source, see [scripts/README.md](scripts/README.md).
+
 ## Setup
 1. Download the repository
 2. If you don't already have one, create a folder, wherever you'd like, that can contain all your third-party libraries for Sumneko's Lua extension.

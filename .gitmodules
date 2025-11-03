@@ -1,0 +1,6 @@
+[submodule "external/cc-tweaked"]
+	path = external/cc-tweaked
+	url = https://github.com/cc-tweaked/CC-Tweaked.git
+[submodule "external/AdvancedPeripherals"]
+	path = external/AdvancedPeripherals
+	url = https://github.com/IntelligenceModding/AdvancedPeripherals
